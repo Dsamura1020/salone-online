@@ -1,0 +1,16 @@
+model BusinessCategory {
+  id String @id @default(uuid())
+
+  name        String  @unique
+  slug        String  @unique
+  description String?
+
+  parentCategoryId String?
+
+  parentCategory BusinessCategory?  @relation("CategoryHierarchy", fields: [parentCategoryId], references: [id])
+  subCategories  BusinessCategory[] @relation("CategoryHierarchy")
+
+  businesses Business[]
+
+  createdAt DateTime @default(now())
+}

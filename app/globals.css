@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/*
+ * Base font-size bump — all Tailwind rem-based utilities scale with this.
+ * 17 px (vs browser default 16 px) improves readability across the dashboard
+ * without breaking any layout or component dimensions.
+ */
+html {
+  font-size: 17px;
+}
+
+/*
+ * Ensure body copy inherits the root font-size and renders crisply.
+ */
+body {
+  font-size: 1rem;          /* 17 px */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

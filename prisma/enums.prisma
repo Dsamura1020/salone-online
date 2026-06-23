@@ -1,0 +1,33 @@
+enum VerificationStatus {
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+enum VerificationDecisionType {
+  APPROVED
+  REJECTED
+}
+
+enum ReviewModerationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  FLAGGED
+}
+
+enum ReportStatus {
+  OPEN
+  REVIEWED
+  DISMISSED
+}
+
+enum DocumentType {
+  BUSINESS_LICENSE
+  TAX_CERTIFICATE
+  INCORPORATION
+  ID_DOCUMENT
+  UTILITY_BILL
+  OTHER
+}

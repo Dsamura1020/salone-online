@@ -1,0 +1,21 @@
+model BusinessDocument {
+  id String @id @default(uuid())
+
+  businessId   String
+  uploadedById String
+
+  documentType DocumentType
+
+  fileName String
+  fileUrl  String
+  mimeType String
+  fileSize BigInt
+
+  uploadedAt DateTime @default(now())
+
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  uploadedBy User     @relation(fields: [uploadedById], references: [id], onDelete: Cascade)
+
+  @@index([businessId])
+  @@index([uploadedById])
+}
