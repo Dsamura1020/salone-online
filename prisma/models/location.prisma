@@ -1,0 +1,22 @@
+model Location {
+  id String @id @default(uuid())
+
+  country       String
+  stateProvince String?
+  city          String
+  district      String?
+
+  addressLine1 String
+  addressLine2 String?
+
+  postalCode String?
+
+  latitude  Decimal? @db.Decimal(10, 7)
+  longitude Decimal? @db.Decimal(10, 7)
+
+  businesses Business[]
+
+  createdAt DateTime @default(now())
+
+  @@index([latitude, longitude])
+}

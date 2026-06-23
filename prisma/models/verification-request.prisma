@@ -1,0 +1,20 @@
+model VerificationRequest {
+  id String @id @default(uuid())
+
+  businessId    String
+  submittedById String
+
+  status VerificationStatus @default(PENDING)
+
+  submittedAt DateTime  @default(now())
+  reviewedAt  DateTime?
+
+  business    Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  submittedBy User     @relation("VerificationSubmitter", fields: [submittedById], references: [id], onDelete: Cascade)
+
+  decisions VerificationDecision[]
+
+  @@index([businessId])
+  @@index([submittedById])
+  @@index([status])
+}

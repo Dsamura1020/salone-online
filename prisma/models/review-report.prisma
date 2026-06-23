@@ -1,0 +1,16 @@
+model ReviewReport {
+  id String @id @default(uuid())
+
+  reviewId     String
+  reportedById String
+  reason       String       @db.Text
+  status       ReportStatus @default(OPEN)
+  createdAt    DateTime     @default(now())
+
+  review     Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  reportedBy User   @relation(fields: [reportedById], references: [id], onDelete: Cascade)
+
+  @@index([reviewId])
+  @@index([reportedById])
+  @@index([status])
+}

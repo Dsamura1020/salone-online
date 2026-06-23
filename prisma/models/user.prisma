@@ -1,0 +1,45 @@
+model User {
+  id            String    @id @default(uuid())
+  name          String?
+  firstName     String
+  lastName      String
+  username      String    @unique
+  email         String    @unique
+  emailVerified DateTime?
+  passwordHash  String?
+  phone         String?
+  image         String?
+  isActive      Boolean   @default(true)
+  lastLoginAt   DateTime?
+
+  isSuspended      Boolean   @default(false)
+  suspendedAt      DateTime?
+  suspensionReason String?
+  timezone         String?
+  locale           String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  roles    UserRole[]
+  accounts Account[]
+  sessions Session[]
+
+  businesses Business[]
+
+  ratings Rating[]
+  reviews Review[]
+  savedBusinesses SavedBusiness[]
+  businessViews BusinessView[]
+
+  reviewReports ReviewReport[]
+
+  businessDocuments             BusinessDocument[]
+  submittedVerificationRequests VerificationRequest[]  @relation("VerificationSubmitter")
+  verificationDecisions         VerificationDecision[]
+
+  auditLogs AuditLog[]
+
+  @@index([email])
+  @@index([username])
+}

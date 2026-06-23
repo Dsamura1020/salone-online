@@ -1,0 +1,53 @@
+model Business {
+  id String @id @default(uuid())
+
+  ownerId    String
+  categoryId String
+  locationId String
+
+  businessName String
+  slug         String @unique
+
+  description String? @db.Text
+
+  email   String?
+  phone   String?
+  website String?
+
+  logoUrl       String?
+  coverImageUrl String?
+
+  foundedYear   Int?
+  employeeCount Int?
+
+  isVerified         Boolean            @default(false)
+  verificationStatus VerificationStatus @default(PENDING)
+
+  isPublished Boolean @default(false)
+
+  averageRating Decimal @default(0) @db.Decimal(3, 2)
+  reviewCount   Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner    User             @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  category BusinessCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  location Location         @relation(fields: [locationId], references: [id], onDelete: Restrict)
+
+  documents            BusinessDocument[]
+  verificationRequests VerificationRequest[]
+
+  ratings Rating[]
+  reviews Review[]
+  savedBy SavedBusiness[]
+  views BusinessView[]
+
+  embeddings SearchEmbedding[]
+
+  @@index([ownerId])
+  @@index([categoryId])
+  @@index([locationId])
+  @@index([verificationStatus])
+  @@index([isPublished, verificationStatus])
+}

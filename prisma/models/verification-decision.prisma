@@ -1,0 +1,18 @@
+model VerificationDecision {
+  id String @id @default(uuid())
+
+  verificationRequestId String
+  verifierId            String
+
+  decision VerificationDecisionType
+
+  comments String? @db.Text
+
+  decidedAt DateTime @default(now())
+
+  verificationRequest VerificationRequest @relation(fields: [verificationRequestId], references: [id], onDelete: Cascade)
+  verifier            User                @relation(fields: [verifierId], references: [id], onDelete: Cascade)
+
+  @@index([verificationRequestId])
+  @@index([verifierId])
+}
